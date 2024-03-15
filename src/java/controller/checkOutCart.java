@@ -118,8 +118,6 @@ public class checkOutCart extends HttpServlet {
                     session.setAttribute("size", 0);
                     request.setAttribute("buy", oid);
                     if (radio_box != null && radio_box.equals("vnpay")) {
-                        System.out.println("vao day");
-                        System.out.println(oid);
                         session.setAttribute("oidVnpay", oid);
                         request.getRequestDispatcher("vnpay/index.jsp").forward(request, response);
                     }

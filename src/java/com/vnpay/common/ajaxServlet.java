@@ -35,7 +35,7 @@ public class ajaxServlet extends HttpServlet {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
-        long amount = Integer.parseInt(req.getParameter("amount"))*100;
+        long amount = (long) Double.parseDouble(req.getParameter("amount"))*100;
         String bankCode = req.getParameter("bankCode");
         
         String vnp_TxnRef = Config.getRandomNumber(8);
@@ -115,8 +115,7 @@ public class ajaxServlet extends HttpServlet {
         job.addProperty("message", "success");
         job.addProperty("data", paymentUrl);
         Gson gson = new Gson();
-     //   resp.getWriter().write(gson.toJson(job));
-     resp.sendRedirect(paymentUrl);
+        resp.getWriter().write(gson.toJson(job));
     }
 
 }

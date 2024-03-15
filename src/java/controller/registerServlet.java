@@ -90,7 +90,7 @@ public class registerServlet extends HttpServlet {
         try {
             if (checkRegister != null) {
                 int code = (int) Math.floor(((Math.random() * 899999) + 100000));
-                p = "Quang1507.";
+                p = "Rsacc" + code +"@";
                 notMd5 = p;
                 conf_p = p;
                 email = u;

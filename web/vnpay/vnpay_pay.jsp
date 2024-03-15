@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:useBean id="db" class="dal.OrderDAO"></jsp:useBean>
+<c:set value="${db.getOrderByOid(sessionScope.oidVnpay)}" var="oderObject"/> 
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,8 +21,6 @@
     </head>
 
     <body>
-        <jsp:useBean id="db" class="dal.OrderDAO"></jsp:useBean>
-        <c:set value="${db.getOrderByOid(sessionScope.oidVnpay)}" var="oderObject"/> 
 
         <div class="container">
             <div class="header clearfix">
@@ -28,18 +28,17 @@
                 <h3 class="text-muted">VNPAY DEMO</h3>
             </div>
             <h3>Tạo mới đơn hàng</h3>
-            <span class="form-control"
-                              type="number"><fmt:formatNumber pattern="##,###,### ₫" value="${oderObject.totalPrice}"/></span>
+
+
             <div class="table-responsive">
                 <form action="../vnpayajax" id="frmCreateOrder" method="post">        
                     <div class="form-group">
                         <label for="amount">Số tiền</label>
-                        ${oderObject.getTotalPriceInt() / 100}
-                        <input class="form-control" data-val="true" 
-                               data-val-number="The field Amount must be a number." 
-                               data-val-required="The Amount field is required." id="amount" 
-                               name="amount" type="number" value="${oderObject.getTotalPriceInt() / 100}"/>
+                        <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" max="100000000" min="1" name="amount" type="hidden" value="${oderObject.getTotalPriceInt()}"/>
                     </div>
+                    <span class="form-control"
+                          type="number"><fmt:formatNumber pattern="##,###,###" value="${oderObject.totalPrice}"/>
+                    </span>
                     <h4>Chọn phương thức thanh toán</h4>
                     <div class="form-group">
                         <h5>Cách 1: Chuyển hướng sang Cổng VNPAY chọn phương thức thanh toán</h5>
@@ -78,8 +77,7 @@
         <link href="https://pay.vnpay.vn/lib/vnpay/vnpay.css" rel="stylesheet" />
         <script src="https://pay.vnpay.vn/lib/vnpay/vnpay.min.js"></script>
         <script type="text/javascript">
-            document.getElementById("amount").value = oderObject.
-                    $("#frmCreateOrder").submit(function () {
+            $("#frmCreateOrder").submit(function () {
                 var postData = $("#frmCreateOrder").serialize();
                 var submitUrl = $("#frmCreateOrder").attr("action");
                 $.ajax({

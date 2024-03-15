@@ -53,6 +53,10 @@ public class Order {
         this.shipCost = shipCost;
         this.discountCost = discountCost;
     }
+    
+    public int getTotalPriceInt() {
+        return (int) totalPrice;
+    }
 
     public int getYear() {
         return year;
@@ -133,10 +137,6 @@ public class Order {
 
     public double getTotalPrice() {
         return totalPrice;
-    }
-    
-    public int getTotalPriceInt() {
-        return (int) totalPrice;
     }
 
     public void setTotalPrice(double totalPrice) {
