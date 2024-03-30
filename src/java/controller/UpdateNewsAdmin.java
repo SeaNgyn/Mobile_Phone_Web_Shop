@@ -92,9 +92,11 @@ public class UpdateNewsAdmin extends HttpServlet {
 
             String newsid = request.getParameter("newsId");
             String title = request.getParameter("title");
-            String description = request.getParameter("description");
+            String description = request.getParameter("content");
             String heading = request.getParameter("heading");
             String id_raw = request.getParameter("newsgrId");
+            String service = request.getParameter("service");
+            
 
             Part part = request.getPart("image");
 
@@ -127,6 +129,9 @@ public class UpdateNewsAdmin extends HttpServlet {
             n.setModifiedOn(date);
             n.setNewsId(newsId);
             dao.updateNews(n);
+            
+            
+            request.setAttribute("service", service);
             request.getRequestDispatcher("listnewsadmin").forward(request, response);
         } catch (ServletException | IOException | NumberFormatException e) {
         }

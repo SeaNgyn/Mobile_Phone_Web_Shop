@@ -39,6 +39,10 @@ public class Dashboard extends HttpServlet {
             List<Order> sm1 = dao.getSalesMonth();
             request.setAttribute("sm1", sm1);
             int totalProfit = dao.getTotalProfit();
+            String monthsSell = dao.getMonthDb();
+            String brand = dao.getBrandName();
+            request.setAttribute("br", brand);
+            request.setAttribute("ms", monthsSell);
             request.setAttribute("profit", totalProfit);
             List<Integer> salesMonth = dao.getPriceSalesMonth();
             List<Integer> salesBrand = dao.getSalesEachBrand();

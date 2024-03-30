@@ -60,15 +60,11 @@
                                 <div class="header-img">
                                     <div class="img-item">
                                         <img src="img/brand2.png" />
-                                        <a class="img-text" href="">
-                                            <p>Some text goes here that describes the image</p>
-                                        </a>
+                                        
                                     </div>
                                     <div class="img-item">
                                         <img src="img/brand3.png" />
-                                        <a class="img-text" href="">
-                                            <p>Some text goes here that describes the image</p>
-                                        </a>
+
                                     </div>
                                 </div>
                             </div>
@@ -136,40 +132,30 @@
                             <div class="col-md-3">
                                 <div class="category-item ch-400">
                                     <img src="img/category_ip.png" />
-                                    <a class="category-name" href="">
-                                        <p>Some text goes here that describes the image</p>
-                                    </a>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="category-item ch-250">
                                     <img src="img/category_oppo.png" />
-                                    <a class="category-name" href="">
-                                        <p>Some text goes here that describes the image</p>
-                                    </a>
+                                    
                                 </div>
                                 <div class="category-item ch-150">
                                     <img src="img/category_realme.png" />
-                                    <a class="category-name" href="">
-                                        <p>Some text goes here that describes the image</p>
-                                    </a>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-3">
 
                                 <div class="category-item ch-400">
                                     <img src="img/category_samsung_2.png" />
-                                    <a class="category-name" href="">
-                                        <p>Some text goes here that describes the image</p>
-                                    </a>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="category-item ch-400">
                                     <img src="img/category_xiaomi.png" />
-                                    <a class="category-name" href="">
-                                        <p>Some text goes here that describes the image</p>
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -279,76 +265,35 @@
             <!-- Recent Product End -->
 
             <!-- Review Start -->
-            <div class="review">
-                <div class="container-fluid">
-                    <div class="row align-items-center review-slider normal-slider">
-                        <div class="col-md-6">
-                            <div class="review-slider-item">
-                                <div class="review-img">
-                                    <img src="img/review-1.jpg" alt="Image">
-                                </div>
-                                <div class="review-text">
-                                    <h2>Customer Name</h2>
-                                    <h3>Profession</h3>
-                                    <div class="ratting">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+            <c:set value="${db6.reviewCustomer()}" var="rvCustomer"></c:set>
+                <div class="review">
+                    <div class="container-fluid">
+                        <div class="row align-items-center review-slider normal-slider">
+                        <c:forEach items="${rvCustomer}" var="rvObject">
+                            <div class="col-md-6">
+                                <div class="review-slider-item">
+                                    <div class="review-img">
+                                        <img src="img2/clientImg.png" alt="Image">
                                     </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae nunc eget leo finibus luctus et vitae lorem
-                                    </p>
+                                    <div class="review-text">
+                                        <h2>${rvObject.getNameCustomer()}</h2>
+                                        <h3 style="font-weight: bold">(${rvObject.getNameProduct()})</h3>
+                                        <div class="ratting">
+                                            <c:forEach begin="1" end="${rvObject.star}">
+                                                <i class="fa fa-star"></i>
+                                            </c:forEach>
+                                        </div>
+                                        <p>
+                                            ${rvObject.comment}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="review-slider-item">
-                                <div class="review-img">
-                                    <img src="img/review-2.jpg" alt="Image">
-                                </div>
-                                <div class="review-text">
-                                    <h2>Customer Name</h2>
-                                    <h3>Profession</h3>
-                                    <div class="ratting">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae nunc eget leo finibus luctus et vitae lorem
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="review-slider-item">
-                                <div class="review-img">
-                                    <img src="img/review-3.jpg" alt="Image">
-                                </div>
-                                <div class="review-text">
-                                    <h2>Customer Name</h2>
-                                    <h3>Profession</h3>
-                                    <div class="ratting">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae nunc eget leo finibus luctus et vitae lorem
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
-            <!-- Review End -->        
+            <!-- Review End -->         
         </div>
         <!-- Footer Start -->
 
@@ -357,7 +302,7 @@
             <!-- Footer Bottom End -->       
 
             <!-- Back to Top -->
-            <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<!--            <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>-->
 
             <!-- JavaScript Libraries -->
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -94,36 +94,40 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="Dashboard">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-                            <!--  -->
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="listp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageProducts
-                            </a>
-                            <c:if test="${sessionScope.adminAcc.roleId == 1}">
-                                <a class="nav-link" href="lista">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                    ManageAdmin
+                                <div class="sb-sidenav-menu-heading">Core</div>
+                                <a class="nav-link" href="Dashboard">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                    Dashboard
                                 </a>
-                                <a class="nav-link" href="listuaccount">
+                                <!--  -->
+                                <div class="sb-sidenav-menu-heading">Addons</div>
+                                <a class="nav-link" href="listp">
                                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                    ManageCustomer
+                                    ManageProducts
                                 </a>
-                            </c:if>                            
-                            <a class="nav-link" href="listo">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageOrders
-                            </a>
-                            <a class="nav-link" href="listnewsadmin?service=getAll">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageNews
-                            </a>
-                        </div>
+                                <c:if test="${sessionScope.adminAcc.roleId == 1}">
+                                    <a class="nav-link" href="lista">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                        ManageAdmin
+                                    </a>
+                                    <a class="nav-link" href="listuaccount">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                        ManageCustomer
+                                    </a>
+                                </c:if>                            
+                                <a class="nav-link" href="listo">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageOrders
+                                </a>
+                                <a class="nav-link" href="listnewsadmin?service=getAll">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageNews
+                                </a>
+                                <a class="nav-link" href="discount-admin.jsp">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageDiscount
+                                </a>
+                            </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <img src="./admin_template/image/415810853_281859611198325_725167687048314184_n.png" alt="Logo">
@@ -134,11 +138,6 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">CommentNews</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="./admin_template/index.jsp">Dashboard</a></li>
-                            <li class="breadcrumb-item active">CommentNews</li>
-                        </ol>
-
                         <!-- Gi? ch? ?? thông báo ho?c c?nh báo -->
                         <div id="productNotifications"></div>
                         <c:if test="${empty sessionScope.adminAcc}">
@@ -157,15 +156,7 @@
                                     <i class="fas fa-table me-1"></i>
                                     Manage CommentNews
                                 </div>
-                                <!-- Navbar Search-->
-                                <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="#">
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="Search for..." name="searchCmt" aria-label="Search for..."
-                                               aria-describedby="btnNavbarSearch" />
-                                        <button class="btn btn-primary" id="btnNavbarSearch" type="submit" ><i
-                                                class="fas fa-search"></i></button>
-                                    </div>
-                                </form>
+                                
                                 <div class="table-responsive ">
                                     <h2 class="mb-4">CommentNews</h2>
                                     <table id="datatablesSimple">

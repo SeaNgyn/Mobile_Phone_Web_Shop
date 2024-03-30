@@ -67,11 +67,11 @@
                         <div class="sb-sidenav-menu">
                             <div class="nav">
                                 <div class="sb-sidenav-menu-heading">Core</div>
-                                <a class="nav-link" href="./admin_template/index.jsp">
+                                <a class="nav-link" href="Dashboard">
                                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                     Dashboard
                                 </a>
-
+                                <!--  -->
                                 <div class="sb-sidenav-menu-heading">Addons</div>
                                 <a class="nav-link" href="listp">
                                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -86,16 +86,19 @@
                                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                         ManageCustomer
                                     </a>
-                                </c:if>
+                                </c:if>                            
                                 <a class="nav-link" href="listo">
                                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                     ManageOrders
                                 </a>
-                                <a class="nav-link" href="charts.jsp">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                    Charts
+                                <a class="nav-link" href="listnewsadmin?service=getAll">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageNews
                                 </a>
-
+                                <a class="nav-link" href="discount-admin.jsp">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageDiscount
+                                </a>
                             </div>
                         </div>
                         <div class="sb-sidenav-footer">
@@ -107,31 +110,10 @@
                     <main>
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Admin</h1>
-                            <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item"><a href="./admin_template/index.jsp">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Admin</li>
-                            </ol>
-
-                            <!-- Thêm nút ?? thêm s?n ph?m m?i -->
-                            <div class="mb-4">
-                                <a href="add-products.jsp"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">AddProduct</button></a>
-                            </div>
-
-                            <!-- Gi? ch? ?? thông báo ho?c c?nh báo -->
-                            <div id="productNotifications"></div>
-
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    DataTables is a third party plugin that is used to generate the demo table below. For more
-                                    information about DataTables, please visit the
-                                    <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                    .
-                                </div>
-                            </div>
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
-                                    DataTable Example
+                                    DataTable 
                                 </div>
                                 <div class="container mt-5">
                                     <h2 class="mb-4">Update Customer</h2>
@@ -140,28 +122,28 @@
                                     <c:set var="p" value="${requestScope.data}" />
                                     <form action="updatecusadmin" method="post">
                                         <div class="mb-3">
-                                            <label for="categoryID" class="form-label">fullName</label>
+                                            <label for="categoryID" class="form-label">FullName</label>
                                             <input type="text" class="form-control" id="fullName" name="fullName" value="${p.fullName}" required>
                                         </div>
-                                        <div class="mb-3">
+                                        <div style="display: none" class="mb-3">
                                             <label for="productName" class="form-label">password</label>
                                             <input type="text" class="form-control" id="password" name="password"  value="${p.password}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="capacity" class="form-label">username</label>
+                                            <label for="capacity" class="form-label">Username</label>
                                             <input type="text" class="form-control" id="username" name="username"  value="${p.username}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="description" class="form-label">email</label>
+                                            <label for="description" class="form-label">Email</label>
                                             <input type="text" class="form-control" id="email" name="email"  value="${p.email}" >
                                         </div>
                                         <div class="mb-3">
-                                            <label for="quantity" class="form-label">phone</label>
+                                            <label for="quantity" class="form-label">Phone</label>
                                             <input type="number" class="form-control" id="phone" name="phone"  value="${p.phone}" >
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="price" class="form-label">address</label>
+                                            <label for="price" class="form-label">Address</label>
                                             <input type="text" class="form-control" id="address" name="address"  value="${p.address}" >
                                         </div>
                                         <!-- Add more fields for additional product information if needed -->

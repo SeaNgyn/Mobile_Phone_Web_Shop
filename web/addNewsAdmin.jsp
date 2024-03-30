@@ -121,36 +121,18 @@
                     <main>
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">News</h1>
-                            <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item"><a href="./admin_template/index.jsp">Dashboard</a></li>
-                                <li class="breadcrumb-item active">News</li>
-                            </ol>
-
-
-
-                            <!-- Gi? ch? ?? thông báo ho?c c?nh báo -->
-                            <div id="newsNotifications"></div>
-
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    DataTables is a third party plugin that is used to generate the demo table below. For more
-                                    information about DataTables, please visit the
-                                    <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                    .
-                                </div>
-                            </div>
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
-                                    DataTable Example
+                                    DataTable
                                 </div>
                                 <div class="container mt-5">
                                     <h2 class="mb-4">Add News</h2>
                                     <h3 style="color: red">${requestScope.error}</h3>
                                     <c:set var="p" value="${requestScope.pnew}" />
-                                    <form action="AddNewsAdmin?service=getAll" method="post" enctype="multipart/form-data">
+                                    <form id="myForm" action="AddNewsAdmin?service=getAll" method="post" enctype="multipart/form-data">
                                         <div class="mb-3">
-                                            <label class="control-label">Nhóm tin tức</label>
+                                            <label class="control-label">News group</label>
                                             <select type="text" name="newsgrId" id="newsgrId"  class="form-control" required>
                                                 <c:forEach items="${requestScope.newsGroup}" var="g">
                                                     <option value="${g.newsGroupId}">${g.newsGroupName}</option>
@@ -158,30 +140,30 @@
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="productName" class="form-label">Tiêu đề</label>
+                                            <label for="productName" class="form-label">Title</label>
                                             <input type="text" class="form-control" id="title" name="title"  required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="capacity" class="form-label">Nội dung ngắn</label>
+                                            <label for="capacity" class="form-label">Heading</label>
                                             <input type="text" class="form-control" id="heading" name="heading"  required>
                                         </div>
 
                                         <div class="form-group col-md-12">
-                                            <label class="control-label">Nội dung bài viết</label>
+                                            <label class="control-label">Content</label>
                                             <div id="editor" style="height: 300px;">
                                             </div>
                                             <input type="hidden" id="editorContent" name="content">
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="updateImg" class="form-label">Hình ảnh</label>
+                                            <label for="updateImg" class="form-label">Image</label>
                                             <input type="file" class="form-control" id="image" name="image" placeholder="Enter image">
                                         </div>
 
 
                                         <!-- Add more fields for additional product information if needed -->
 
-                                        <button type="submit" class="btn btn-primary">Thêm tin mới</button>
+                                        <button type="submit" class="btn btn-primary">Add</button>
                                     </form>
                                 </div>
                             </div>

@@ -68,7 +68,7 @@
                             <div class="nav">
                                 <div class="sb-sidenav-menu-heading">Core</div>
                                 <a class="nav-link" href="Dashboard">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-a lt"></i></div>
                                     Dashboard
                                 </a>
                                 <!--  -->
@@ -109,61 +109,40 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Products</h1>
-                            <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item"><a href="./admin_template/index.jsp">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Products</li>
-                            </ol>
-
-                            <!-- Thêm nút ?? thêm s?n ph?m m?i -->
-                            <div class="mb-4">
-                                <a href="add-products.jsp"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">AddProduct</button></a>
-                            </div>
-
-                            <!-- Gi? ch? ?? thông báo ho?c c?nh báo -->
+                            <h1 class="mt-4">Admin</h1>
                             <div id="productNotifications"></div>
-
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    DataTables is a third party plugin that is used to generate the demo table below. For more
-                                    information about DataTables, please visit the
-                                    <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                    .
-                                </div>
-                            </div>
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
-                                    DataTable Example
+                                    DataTable 
                                 </div>
                                 <div class="container mt-5">
                                     <h2 class="mb-4">Add Admin</h2>
                                     <h3 style="color: red">${requestScope.error}</h3>
                                     <form action="addAdmin">
                                         <div class="mb-3">
-                                            <label for="categoryID" class="form-label">firstname</label>
+                                            <label for="categoryID" class="form-label">Firstname</label>
                                             <input type="text" class="form-control" id="firstname" name="firstname" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="productName" class="form-label">lastname</label>
+                                            <label for="productName" class="form-label">Lastname</label>
                                             <input type="text" class="form-control" id="lastname" name="lastname" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="capacity" class="form-label">username</label>
+                                            <label for="capacity" class="form-label">Username</label>
                                             <input type="text" class="form-control" id="username" name="username" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="description" class="form-label">password</label>
-                                            <input type="text" class="form-control" id="password" name="password" required>
+                                            <label for="description" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password" required>
                                         </div>
                                         <div class="mb-3">
                                             <select type="text" name="roleId" id="roleId" class="form-control" required>
-                                                <option value="1">Admin</option>
                                                 <option value="2">Staff</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="price" class="form-label">email</label>
+                                            <label for="price" class="form-label">Email</label>
                                             <input type="text" class="form-control" id="email" name="email" >
                                         </div>
                                         <c:set value="${sessionScope.adminAcc}" var="adminAccount"></c:set>

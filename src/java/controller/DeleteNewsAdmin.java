@@ -33,9 +33,11 @@ public class DeleteNewsAdmin extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id_raw = request.getParameter("newsId");
+        String service = request.getParameter("service");
         int id = Integer.parseInt(id_raw);
         NewsDAO dao = new NewsDAO();
         dao.delete(id);
+        request.setAttribute("service", service);
         request.getRequestDispatcher("listnewsadmin").forward(request, response);
     } 
 

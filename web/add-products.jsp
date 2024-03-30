@@ -14,7 +14,7 @@
         <link href="./admin_template/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="<c:url value='/ckeditor/ckeditor.js' />"></script>
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
         <style>
             .container label {
                 font-weight: bold;
@@ -119,12 +119,6 @@
                     <main>
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Products</h1>
-                            <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item"><a href="./admin_template/index.jsp">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Products</li>
-                            </ol>
-
-                            <!-- Thêm nút ?? thêm s?n ph?m m?i -->
                             <div class="mb-4">
                                 <a href="add-products.jsp"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">AddProduct</button></a>
                             </div>
@@ -133,25 +127,17 @@
                             <div id="productNotifications"></div>
 
                             <div class="card mb-4">
-                                <div class="card-body">
-                                    DataTables is a third party plugin that is used to generate the demo table below. For more
-                                    information about DataTables, please visit the
-                                    <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                    .
-                                </div>
-                            </div>
-                            <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
-                                    DataTable Example
+                                    DataTable
                                 </div>
                                 <div class="container mt-5">
                                     <h2 class="mb-4">Add Product</h2>
                                     <h3 style="color: red">${requestScope.error}</h3>
                                     <c:set var="p" value="${requestScope.pnew}" />
-                                    <form action="addproduct" method="post" enctype="multipart/form-data">
+                                    <form id="myForm" action="addproduct" method="post" enctype="multipart/form-data">
                                         <div class="mb-3">
-                                            <label class="control-label">Hãng điện thoại</label>
+                                            <label class="control-label">Brand</label>
                                             <select type="text" name="category" id="categoryID" value="${p.categoryId}" class="form-control" required>
                                                 <option value="1">Iphone</option>
                                                 <option value="2">Samsung</option>
@@ -160,35 +146,38 @@
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="productName" class="form-label">Tên sản phẩm</label>
+                                            <label for="productName" class="form-label">Name Product</label>
                                             <input type="text" class="form-control" id="productName" name="productName" value="${p.name}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="capacity" class="form-label">Dung lượng</label>
+                                            <label for="capacity" class="form-label">Capacity</label>
                                             <input type="number" class="form-control" id="capacity" name="capacity" value="${p.capacity}" required>
                                         </div>
+     
                                         <div class="form-group col-md-12">
-                                            <label class="control-label">Mô tả sản phẩm</label>
-                                            <textarea class="form-control" rows="20" cols="20" name="describe" id="describe"  >${p.description}</textarea>
+                                            <label class="control-label">Description</label>
+                                            <div id="editor" style="height: 300px;">
+                                            </div>
+                                            <input type="hidden" id="editorContent" name="describe">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="quantity" class="form-label">Số lượng</label>
+                                            <label for="quantity" class="form-label">Quantity</label>
                                             <input type="number" class="form-control" id="quantity" name="quantity" value="${p.quantity}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="price" class="form-label">Giá tiền</label>
+                                            <label for="price" class="form-label">Price</label>
                                             <input type="text" class="form-control" id="price" name="price" value="${p.price}" oninput="formatCurrency(this)" required>
                                             <!--                                        <input class="form-control" name="product_price" type="text" placeholder="" oninput="formatCurrency(this)">-->
                                         </div>
                                         <div class="mb-3">
-                                            <label for="updateImg" class="form-label">Hình ảnh</label>
+                                            <label for="updateImg" class="form-label">Image</label>
                                             <input type="file" class="form-control" id="image" name="image" placeholder="Enter image">
                                         </div>
 
 
                                         <!-- Add more fields for additional product information if needed -->
 
-                                        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+                                        <button type="submit" class="btn btn-primary">Add</button>
                                     </form>
                                 </div>
                             </div>
@@ -209,17 +198,11 @@
                 </div>
             </div>
             <script>
-                var describe = '';
-                $(document).ready(function () {
-                    // Adjust CKEDITOR configuration to disable auto paragraphs
-                    describe = CKEDITOR.replace('describe', {
-                        autoParagraph: false
-                    });
-                });
+              
 
                 // Function to get cleaned HTML content
                 function getCleanedHTML() {
-                    return describe.getData();
+                    return quill.root.innerHTML;
                 }
 
 
@@ -235,6 +218,35 @@
                 }
 
             </script>                     
+            <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+            <script>
+                // Initialize Quill
+                var quill = new Quill('#editor', {
+                    theme: 'snow', // 'snow' is one of the themes available
+                    modules: {
+                        toolbar: {
+                            container: [
+                                [{'header': [1, 2, false]}],
+                                ['bold', 'italic', 'underline', 'strike'],
+                                [{'color': []}, {'background': []}],
+                                [{'align': []}],
+                                ['link', 'image'],
+                                ['clean']
+                            ],
+                        },
+                    },
+                });
+
+                document.getElementById('myForm').addEventListener('submit', function (event) {
+                    // Get Quill's HTML content
+                    var htmlContent = document.querySelector('.ql-editor').innerHTML;
+                    // Set the content to the input field with name "content"
+                    document.querySelector('input[name="describe"]').value = htmlContent;
+                });
+                function logHtmlContent() {
+                    console.log(quill.root.innerHTML);
+                }
+            </script>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
             crossorigin="anonymous"></script>

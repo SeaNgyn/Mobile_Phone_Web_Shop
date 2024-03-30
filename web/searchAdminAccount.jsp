@@ -87,42 +87,40 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="./admin_template/index.jsp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                                 data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.jsp">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.jsp">Light Sidenav</a>
-                                </nav>
+                                <div class="sb-sidenav-menu-heading">Core</div>
+                                <a class="nav-link" href="Dashboard">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                    Dashboard
+                                </a>
+                                <!--  -->
+                                <div class="sb-sidenav-menu-heading">Addons</div>
+                                <a class="nav-link" href="listp">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageProducts
+                                </a>
+                                <c:if test="${sessionScope.adminAcc.roleId == 1}">
+                                    <a class="nav-link" href="lista">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                        ManageAdmin
+                                    </a>
+                                    <a class="nav-link" href="listuaccount">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                        ManageCustomer
+                                    </a>
+                                </c:if>                            
+                                <a class="nav-link" href="listo">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageOrders
+                                </a>
+                                <a class="nav-link" href="listnewsadmin?service=getAll">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageNews
+                                </a>
+                                <a class="nav-link" href="discount-admin.jsp">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageDiscount
+                                </a>
                             </div>
-
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="listp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageProducts
-                            </a>
-                            <a class="nav-link" href="lista">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageAdmin
-                            </a>
-                            <a class="nav-link" href="listuaccount">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageCustomer
-                            </a>
-                            <a class="nav-link" href="listo">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageOrders
-                            </a>
-                            <a class="nav-link" href="charts.jsp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-
-                        </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <img src="img/logo_1.png" alt="Logo">
@@ -132,28 +130,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Users</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.jsp">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Users</li>
-                        </ol>
-
-                        <!-- Thêm nút ?? thêm s?n ph?m m?i
-                        <div class="mb-4">
-                            <a href="add-products.jsp"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">AddAdmin</button></a>
-                        </div> -->
-
-                        <!-- Gi? ch? ?? thông báo ho?c c?nh báo -->
-                        <div id="productNotifications"></div>
-
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                DataTables is a third party plugin that is used to generate the demo table below. For more
-                                information about DataTables, please visit the
-                                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                .
-                            </div>
-                        </div>
+                        <h1 class="mt-4">Admin</h1>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>

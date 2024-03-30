@@ -6,7 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +21,7 @@
         <link href="./admin_template/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="<c:url value='/ckeditor/ckeditor.js' />"></script>
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     </head>
 
     <body class="sb-nav-fixed">
@@ -61,51 +61,40 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="./admin_template/index.jsp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                               data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Layouts
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                                 data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.jsp">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.jsp">Light Sidenav</a>
-                                </nav>
+                                <div class="sb-sidenav-menu-heading">Core</div>
+                                <a class="nav-link" href="Dashboard">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                    Dashboard
+                                </a>
+                                <!--  -->
+                                <div class="sb-sidenav-menu-heading">Addons</div>
+                                <a class="nav-link" href="listp">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageProducts
+                                </a>
+                                <c:if test="${sessionScope.adminAcc.roleId == 1}">
+                                    <a class="nav-link" href="lista">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                        ManageAdmin
+                                    </a>
+                                    <a class="nav-link" href="listuaccount">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                        ManageCustomer
+                                    </a>
+                                </c:if>                            
+                                <a class="nav-link" href="listo">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageOrders
+                                </a>
+                                <a class="nav-link" href="listnewsadmin?service=getAll">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageNews
+                                </a>
+                                <a class="nav-link" href="discount-admin.jsp">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageDiscount
+                                </a>
                             </div>
-
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="listp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageProducts
-                            </a>
-                            <c:if test="${sessionScope.adminAcc.roleId == 1}">
-                                <a class="nav-link" href="lista">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                    ManageAdmin
-                                </a>
-                                <a class="nav-link" href="listuaccount">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                    ManageCustomer
-                                </a>
-                            </c:if>
-                            <a class="nav-link" href="listo">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageOrders
-                            </a>
-                            <a class="nav-link" href="charts.jsp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-
-                        </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <img src="./admin_template/image/415810853_281859611198325_725167687048314184_n.png" alt="Logo">
@@ -116,11 +105,6 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Products</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="./admin_template/index.jsp">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Products</li>
-                        </ol>
-
                         <!-- Thêm nút ?? thêm s?n ph?m m?i -->
                         <div class="mb-4">
                             <a href="add-products.jsp"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">AddProduct</button></a>
@@ -129,14 +113,6 @@
                         <!-- Gi? ch? ?? thông báo ho?c c?nh báo -->
                         <div id="productNotifications"></div>
 
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                DataTables is a third party plugin that is used to generate the demo table below. For more
-                                information about DataTables, please visit the
-                                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                .
-                            </div>
-                        </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -148,16 +124,19 @@
                                 <h3 style="color: red">${requestScope.error}</h3>
                                 <c:set var="p" value="${requestScope.data}" />
 
-                                <form action="updatep" method="post" enctype="multipart/form-data">
+                                <form id="myForm" action="updatep" method="post" enctype="multipart/form-data">
 
                                     <div class="mb-3">
                                         <label for="updateCategoryID" class="form-label">Product ID</label>
                                         <input type="text" class="form-control" id="updateCategoryID" name="productID" value="${p.productId}" readonly>
-                                    </div>
+                                    </div>                     
                                     <div class="mb-3">
-                                        <label for="updateCategoryID" class="form-label">Category ID</label>
-                                        <input type="text" class="form-control" id="updateCategoryID" name="categoryID" value="${p.categoryId}" required>
-                                    </div>
+                                        <select type="text" name="categoryID" id="categoryID" class="form-control" required>
+                                            <option value="0">Brand</option>
+                                            <c:forEach items="${requestScope.ca}" var="c"> 
+                                                <option value="${p.categoryId}" ${p.categoryId == c.categoryId ? 'selected' : ''}>${c.categoryName}</option>
+                                            </c:forEach>
+                                        </select>
                                     <div class="mb-3">
                                         <label for="updateProductName" class="form-label">Name</label>
                                         <input type="text" class="form-control" id="updateProductName" name="productName" value="${p.name}" required>
@@ -166,10 +145,14 @@
                                         <label for="updateCapacity" class="form-label">Capacity</label>
                                         <input type="number" class="form-control" id="updateCapacity" name="capacity" value="${p.capacity}" required>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="updateDescription" class="form-label">Mô tả</label>
-                                        <textarea class="form-control" id="describe" name="describe" required>${p.description}</textarea>
-                                    </div>
+                                   
+                                    <div class="form-group col-md-12">
+                                            <label class="control-label">Description</label>
+                                            <div id="editor" style="height: 300px;">
+                                                ${p.description}
+                                            </div>
+                                            <input type="hidden" id="editorContent" name="describe">
+                                        </div>
                                     <div class="mb-3">
                                         <label for="updateQuantity" class="form-label">Quantity</label>
                                         <input type="number" class="form-control" id="updateQuantity" name="quantity" value="${p.quantity}" required>
@@ -177,7 +160,7 @@
                                     <div class="mb-3">
 
                                         <label for="updatePrice" class="form-label">Price</label>
-                                        <input type="text" class="form-control" id="updatePrice" name="price"  value="${p.price}" oninput="formatCurrency(this)"  >
+                                        <input type="text" class="form-control" id="updatePrice" name="price"  value="<fmt:formatNumber pattern="##,###,### ₫" value="${p.price}"/>" oninput="formatCurrency(this)"  >
                                     </div>
                                     <div class="mb-3">
                                         <label for="updatePrice" class="form-label">Createdby</label>
@@ -187,11 +170,6 @@
                                         <label for="updatePrice" class="form-label">Createdon</label>
                                         <input type="string" class="form-control" id="createdon" name="createdOn" value="${p.createdOn}" readonly>
                                     </div>
-                                    <!--                                    <div class="mb-3">
-                                                                            <label for="updateImg" class="form-label">Image</label>
-                                                                            <img width="40px" src="img2/${p.image.imagePath}">
-                                                                            <input type="file" class="form-control" id="image" name="image" value="img2/${p.image.imagePath}" >
-                                                                        </div>-->
                                     <div class="mb-3">
                                         <label for="updateImg" class="form-label">Image</label>
                                         <img width="40px" id="previewImage" src="img2/${p.image.imagePath}">
@@ -220,18 +198,12 @@
             </div>
         </div>
         <script>
-            var describe = '';
-            $(document).ready(function () {
-                // Adjust CKEDITOR configuration to disable auto paragraphs
-                describe = CKEDITOR.replace('describe', {
-                    autoParagraph: false
-                });
-            });
 
+            
             // Function to get cleaned HTML content
-            function getCleanedHTML() {
-                return describe.getData();
-            }
+                function getCleanedHTML() {
+                    return quill.root.innerHTML;
+                }
 
             function formatCurrency(input) {
                 // Remove non-numeric characters
@@ -280,6 +252,35 @@
                     })
                     .catch(error => console.error('Error loading default image:', error));
         </script>    
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+            <script>
+                // Initialize Quill
+                var quill = new Quill('#editor', {
+                    theme: 'snow', // 'snow' is one of the themes available
+                    modules: {
+                        toolbar: {
+                            container: [
+                                [{'header': [1, 2, false]}],
+                                ['bold', 'italic', 'underline', 'strike'],
+                                [{'color': []}, {'background': []}],
+                                [{'align': []}],
+                                ['link', 'image'],
+                                ['clean']
+                            ],
+                        },
+                    },
+                });
+
+                document.getElementById('myForm').addEventListener('submit', function (event) {
+                    // Get Quill's HTML content
+                    var htmlContent = document.querySelector('.ql-editor').innerHTML;
+                    // Set the content to the input field with name "content"
+                    document.querySelector('input[name="describe"]').value = htmlContent;
+                });
+                function logHtmlContent() {
+                    console.log(quill.root.innerHTML);
+                }
+            </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>

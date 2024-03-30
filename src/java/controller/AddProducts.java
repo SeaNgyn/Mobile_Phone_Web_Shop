@@ -128,7 +128,7 @@ public class AddProducts extends HttpServlet {
                 dao.insert(pnew, fileName);
                 request.getRequestDispatcher("listp").forward(request, response);
             } else {
-                request.setAttribute("error", name + capacity + " already exists!");
+                request.setAttribute("error", name +"-"+ capacity +"GB" + " already exists!");
                 request.getRequestDispatcher("add-products.jsp").forward(request, response);
             }
         } catch (NumberFormatException | IOException e) {

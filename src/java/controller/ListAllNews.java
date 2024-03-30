@@ -96,6 +96,7 @@ public class ListAllNews extends HttpServlet {
             String newsId = request.getParameter("newsId");
             int newsID = Integer.parseInt(newsId);
             int grId = dao.getRecommendByNews(newsID);
+            List<CommentNews> cmt = cn.getAllCommentById(newsID);
             List<News> recom = dao.getNewsByGroupId(grId, 1, 6, newsID);
             List<Integer> list = cn.getAllStar(newsID);
 
@@ -112,6 +113,7 @@ public class ListAllNews extends HttpServlet {
             News n = dao.getNewById(newsID);
             request.setAttribute("recom", recom);
             request.setAttribute("newsdetail", n);
+            request.setAttribute("cmt", cmt);
             request.getRequestDispatcher("NewDetail.jsp").forward(request, response);
         }
 

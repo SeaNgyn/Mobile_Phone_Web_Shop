@@ -102,18 +102,17 @@
                     <div class="col-lg-4">
                         <div class="cart-page-inner">
                             <div class="row">
-<!--                                <div class="col-md-12">
-                                    <div class="coupon">
-                                        <input type="text" placeholder="Mã giảm giá">
-                                        <button>Nhập</button>
-                                    </div>
-                                </div>-->
+                                <!--                                <div class="col-md-12">
+                                                                    <div class="coupon">
+                                                                        <input type="text" placeholder="Mã giảm giá">
+                                                                        <button>Nhập</button>
+                                                                    </div>
+                                                                </div>-->
                                 <div class="col-md-12">
                                     <div class="cart-summary">
                                         <div class="cart-content">
                                             <!--                                            <h1>Cart Summary</h1>-->
                                             <p>Sub Total<span><fmt:formatNumber pattern="##,###,### ₫" value="${o.getTotalMoney()}"/></span></p>
-                                            <p>Shipping Cost<span>0 ₫</span></p>
                                             <h2>Grand Total<span><fmt:formatNumber pattern="##,###,### ₫" value="${o.getTotalMoney()}"/></span></h2>
                                         </div>
                                         <div class="cart-btn">
@@ -132,37 +131,116 @@
         <!-- Footer Start -->
         <jsp:include page="footer.jsp"></jsp:include>
 
-            <!-- Footer Bottom End -->       
+        <!-- Footer Bottom End -->       
 
-            <!-- Back to Top -->
-            <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        <!-- Back to Top -->
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-            <!-- JavaScript Libraries -->
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-            <script src="lib/easing/easing.min.js"></script>
-            <script src="lib/slick/slick.min.js"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/slick/slick.min.js"></script>
 
-            <!--  Javascript -->
-            <script>
-                function minus(productId) {
-                    $.ajax({
-                        url: "/WebApplication3/process",
-                        type: 'GET',
-                        data: {
-                            id: productId,
-                            num: -1
-                        },
-                        success: function ()
-                        {
-                            
+        <!--  Javascript -->
+        <script>
+//-------------------------------------------------------------------------------------------------------------------------------------------
+//TOAN
+
+            let url = "search?action=filterAll"
+            const typeItem = document.querySelectorAll('.typeItem');
+            const navLink = document.querySelectorAll('.nav-link_cate');
+
+            function getPaging(tag, event) {
+                event.preventDefault();
+                let filterType = document.querySelector('.typeItem.choosed');
+                let filterPrice = document.querySelector('.priceItem.choosed');
+                let navLinkValue = document.querySelector('.nav-link_cate.choosed');
+                let searchValue = document.querySelector('#searchInput');
+                if (filterType != null) {
+                    url += "&typeSort=" + filterType.innerText;
+                }
+                if (filterPrice != null) {
+                    url += "&priceSort=" + filterPrice.innerText;
+                }
+                if (navLinkValue != null) {
+                    url += "&cateName=" + (navLinkValue.innerText).trim();
+                }
+                if (searchValue.value != '') {
+                    url += "&searchProduct=" + searchValue.value;
+                }
+                url += "&indexPage=" + tag;
+                window.location = url
+            }
+            typeItem.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    for (var i = 0; i < typeItem.length; i++) {
+                        if (typeItem[i].classList.contains('choosed')) {
+                            typeItem[i].classList.remove('choosed');
                         }
+                    }
+                    item.classList.add('choosed');
+                    direct();
+                })
+            })
 
-                    });
+            navLink.forEach(function (item) {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault()
+                    for (var i = 0; i < navLink.length; i++) {
+                        if (navLink[i].classList.contains('choosed')) {
+                            navLink[i].classList.remove('choosed');
+                        }
+                    }
+                    item.classList.add('choosed');
+                    direct();
+                })
+            })
+            const priceItem = document.querySelectorAll('.priceItem');
+
+            priceItem.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    for (var i = 0; i < priceItem.length; i++) {
+                        if (priceItem[i].classList.contains('choosed')) {
+                            priceItem[i].classList.remove('choosed');
+                        }
+                    }
+                    item.classList.add('choosed');
+                    direct();
+                })
+            })
+            const searchBtn = document.querySelector('#searchBtn');
+            searchBtn.addEventListener('click', function () {
+                direct();
+            })
+            document.querySelector('#searchInput').addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    direct();
+                }
+            });
+
+            function direct() {
+                let filterType = document.querySelector('.typeItem.choosed');
+                let filterPrice = document.querySelector('.priceItem.choosed');
+                let navLinkValue = document.querySelector('.nav-link_cate.choosed');
+                let searchValue = document.querySelector('#searchInput');
+                if (filterType != null) {
+                    url += "&typeSort=" + filterType.innerText;
                 }
 
+                if (filterPrice != null) {
+                    url += "&priceSort=" + filterPrice.innerText;
+                }
+                if (navLinkValue != null) {
+                    url += "&cateName=" + (navLinkValue.innerText).trim();
+                }
+                if (searchValue.value != '') {
+                    url += "&searchProduct=" + searchValue.value;
+                }
+                window.location = url;
+            }
 
         </script>
 

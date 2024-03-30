@@ -44,7 +44,9 @@ public class ListNewsAdmin extends HttpServlet {
         request.setAttribute("newsgroup", group);
         String service = request.getParameter("service");
         request.setAttribute("service", service);
+        System.out.println("Value of service: " + service);
 
+        if (service != null) {
         if (service.equals("searchNews")) {
             String search = request.getParameter("searchNews");
             request.setAttribute("textSearch", search);
@@ -115,6 +117,10 @@ public class ListNewsAdmin extends HttpServlet {
             List<News> list = dao.getNewsByGroupId(groupId, index, pageSize, 0);
             request.setAttribute("listNew", list);
             request.getRequestDispatcher("newsAdmin.jsp").forward(request, response);
+        }
+        }
+        else{
+             response.getWriter().println("Lỗi: Giá trị của service là null.");
         }
         } catch (ServletException | IOException | NumberFormatException e) {
             e.printStackTrace();

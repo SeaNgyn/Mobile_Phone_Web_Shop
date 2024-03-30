@@ -131,36 +131,23 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Orders</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="./admin_template/index.jsp">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Orders</li>
-                        </ol>
-                        <!-- Gi? ch? ?? thông báo ho?c c?nh báo -->
                         <div id="productNotifications"></div>
 
                         <div class="card mb-4">
-                            <div class="card-body">
-                                DataTables is a third party plugin that is used to generate the demo table below. For more
-                                information about DataTables, please visit the
-                                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                .
-                            </div>
-                        </div>
-                        <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                DataTable Example
+                                DataTable
                             </div>
                             <div class="container mt-5">
                                 <h2>Order Management</h2>
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>orderID</th>
-                                            <th>cutomerName</th>
-                                            <th>totalPrice</th>
-                                            <th>address</th>
-                                            <th>createdOn</th>
+                                            <th>OrderID</th>
+                                            <th>CutomerName</th>
+                                            <th>TotalPrice</th>
+                                            <th>Address</th>
+                                            <th>CreatedOn</th>
                                             <th>Status</th>
                                             <th>ShipCost</th>
                                             <th>Action</th>

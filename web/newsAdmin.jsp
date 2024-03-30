@@ -132,10 +132,6 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">News</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="./admin_template/index.jsp">Dashboard</a></li>
-                            <li class="breadcrumb-item active">News</li>
-                        </ol>
                         <c:if test="${not empty sessionScope.adminAcc}">
                             <!-- Thêm nút ?? thêm s?n ph?m m?i -->
                             <div class="mb-4">
@@ -200,9 +196,9 @@
                                                             <span class="ms-3">${n.newGroupname}</span>
                                                         </div>
                                                         <div class="mt-3">
-                                                            <a href="UpdateNewsAdmin?newsId=${n.newsId}"><button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#addEditCustomerModal">Cập nhật</button></a>
-                                                            <a href="DeleteNewsAdmin?newsId=${n.newsId}" onclick="confirmDelete()"><button class="btn btn-danger btn-sm">Xóa</button></a>
-                                                            <a href="ListCommentNewsAdmin?newsId=${n.newsId}" ><button class="btn btn-danger btn-sm">Quản lí comment</button></a>
+                                                            <a href="UpdateNewsAdmin?newsId=${n.newsId}"><button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#addEditCustomerModal">Update</button></a>
+                                                            <a href="DeleteNewsAdmin?newsId=${n.newsId}&service=getAll" onclick="confirmDelete()"><button class="btn btn-danger btn-sm">Delete</button></a>
+                                                            <a href="ListCommentNewsAdmin?newsId=${n.newsId}" ><button class="btn btn-danger btn-sm">Manage comment</button></a>
                                                         </div>
 
                                                     </div>

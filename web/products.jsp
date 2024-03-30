@@ -126,10 +126,6 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Products</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="./admin_template/index.jsp">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Products</li>
-                        </ol>
                         <c:if test="${not empty sessionScope.adminAcc}">
                             <!-- Thêm nút ?? thêm s?n ph?m m?i -->
                             <div class="mb-4">

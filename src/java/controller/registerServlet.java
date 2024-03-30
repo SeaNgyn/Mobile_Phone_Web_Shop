@@ -97,18 +97,18 @@ public class registerServlet extends HttpServlet {
 
             } else {
 
-                if (!phone.matches("^[0-9]+$")) {
-                    request.setAttribute("errorPass", "Số điện thoại không hợp lệ");
+                if (!phone.matches("^[0-9]{10}$")) {
+                    request.setAttribute("errorPass", "Invalid phone number");
                     request.setAttribute("signup", check);
                     request.getRequestDispatcher("login_2.jsp").forward(request, response);
                     return;
                 } else if (!p.matches(regex)) {
-                    request.setAttribute("errorPass", "Mật khẩu cần chứa ít nhất 6 kí tự bao gồm kí tự thường, kí tự hoa, chữ số và kí tự đặc biệt!!.");
+                    request.setAttribute("errorPass", "Password must contain at least 6 characters including lowercase letters, uppercase letters, numbers and special characters!.");
                     request.setAttribute("signup", check);
                     request.getRequestDispatcher("login_2.jsp").forward(request, response);
                     return;
                 } else if (!p.equals(conf_p)) {
-                    request.setAttribute("errorPass", "Mật khẩu phải trùng nhau khi đăng kí!!!");
+                    request.setAttribute("errorPass", "Passwords must match when registering!!!");
                     request.setAttribute("signup", check);
                     request.getRequestDispatcher("login_2.jsp").forward(request, response);
                     return;

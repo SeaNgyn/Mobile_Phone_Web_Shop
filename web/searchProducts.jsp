@@ -83,37 +83,40 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="./admin_template/index.jsp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-
-
-
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="listp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageProducts
-                            </a>
-                            <a class="nav-link" href="lista">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageAdmin
-                            </a>
-                            <a class="nav-link" href="listuaccount">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageCustomer
-                            </a>
-                            <a class="nav-link" href="listo">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                ManageOrders
-                            </a>
-                            <a class="nav-link" href="charts.jsp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-
-                        </div>
+                                <div class="sb-sidenav-menu-heading">Core</div>
+                                <a class="nav-link" href="Dashboard">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-a lt"></i></div>
+                                    Dashboard
+                                </a>
+                                <!--  -->
+                                <div class="sb-sidenav-menu-heading">Addons</div>
+                                <a class="nav-link" href="listp">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageProducts
+                                </a>
+                                <c:if test="${sessionScope.adminAcc.roleId == 1}">
+                                    <a class="nav-link" href="lista">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                        ManageAdmin
+                                    </a>
+                                    <a class="nav-link" href="listuaccount">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                        ManageCustomer
+                                    </a>
+                                </c:if>                            
+                                <a class="nav-link" href="listo">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageOrders
+                                </a>
+                                <a class="nav-link" href="listnewsadmin?service=getAll">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageNews
+                                </a>
+                                <a class="nav-link" href="discount-admin.jsp">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    ManageDiscount
+                                </a>
+                            </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <img src="./admin_template/image/415810853_281859611198325_725167687048314184_n.png" alt="Logo">

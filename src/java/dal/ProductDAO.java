@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Image;
 import model.Product;
+import model.review;
 
 /**
  *
@@ -23,6 +24,31 @@ public class ProductDAO extends DBContext {
     private final LocalDate curDate = java.time.LocalDate.now();
     private final String date = curDate.toString();
     
+    
+    //THEANH
+    public List<review> reviewCustomer() {
+        List<review> list = new ArrayList<>();
+        try {
+            String sql = "  select r.reviewID, p.[Name], c.FullName, r.comment, r.star, r.time_new from Review r "
+                    + "join Customer c on r.CustomerId = c.CustomerId  "
+                    + "join Product p on p.ProductId = r.ProductId where r.star >= 4";
+            
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                review rv = new review();
+                rv.setReviewId(rs.getInt(1));
+                rv.setNameProduct(rs.getString(2));
+                rv.setNameCustomer(rs.getString(3));
+                rv.setComment(rs.getString(4));
+                rv.setStar(rs.getInt(5));
+                rv.setTime_rv(rs.getString(6));
+                list.add(rv);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
     //Cuong
     public List<Product> getTop5Product() {
         List<Product> list = new ArrayList<>();
@@ -494,41 +520,6 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
-    public List<Product> searchEachPages(String txtSearch, int index, int size) {
-        List<Product> list = new ArrayList<>();
-        String sql = "WITH x as (SELECT ROW_NUMBER() over (order by Price asc) as RowNumber,* from Product where [name] like ?)\n"
-                + "SELECT * FROM x  Where RowNumber between ? and ? ";
-
-        try {
-
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, "%" + txtSearch + "%");
-            st.setInt(2, index * size - (size - 1));
-            st.setInt(3, index * size);
-
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Product p = new Product(
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getInt(6),
-                        rs.getInt(7),
-                        rs.getInt(8),
-                        rs.getString(9),
-                        rs.getInt(10),
-                        rs.getString(11),
-                        rs.getInt(12),
-                        getImageByProductId(rs.getInt(2)));
-                list.add(p);
-            }
-
-        } catch (SQLException e) {
-        }
-
-        return list;
-    }
 
     public int count() {
         try {
@@ -696,6 +687,60 @@ public class ProductDAO extends DBContext {
         Product p = test.getProdctById(3);
         System.out.println(p.getName());
     }
+    
+    //CUONG
+    public List<Product> searchEachPages(String txtSearch, int index, int pageSize) {
+        List<Product> list = new ArrayList<>();
+
+        // Tách chuỗi thành mảng các từ khóa
+        String[] keywords = txtSearch.split("\\s+");
+
+        // Xây dựng điều kiện tìm kiếm trong SQL
+        StringBuilder conditionBuilder = new StringBuilder();
+        for (String keyword : keywords) {
+            if (!keyword.isEmpty()) {
+                if (conditionBuilder.length() > 0) {
+                    conditionBuilder.append(" OR ");
+                }
+                conditionBuilder.append("p.[Name] LIKE N'%" + keyword + "%'");
+            }
+        }
+
+        String sql = "SELECT * FROM Product p WHERE  " + conditionBuilder.toString()
+        + " ORDER BY p.Price OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, (index - 1) * pageSize);
+            st.setInt(2, pageSize);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getInt(11),
+                        getImageByProductId(rs.getInt(1))
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("SQL Query: " + sql);
+            e.printStackTrace();  // Thêm in thông báo lỗi để dễ dàng xác định lỗi khi phát triển
+            
+        }
+
+        return list;
+    }
+
 
     //CUONG
     public void insert(Product p, String image) {

@@ -59,7 +59,7 @@ public class AddComment extends HttpServlet {
                 // Gửi mã kích hoạt JavaScript để hiển thị popup và xử lý điều hướng
                 PrintWriter out = response.getWriter();
                 out.println("<script type=\"text/javascript\">");
-                out.println("if(confirm('Vui lòng đăng nhập trước khi bình luận. Bạn có muốn đăng nhập không?')) {");
+                out.println("if(confirm('Please log in before commenting. Do you want to log in?')) {");
                 out.println("   window.location.href='login_2.jsp';");  // Điều hướng đến trang login khi nhấn "Đăng nhập"
                 out.println("} else {");
                 out.println("   history.back();");  // Quay lại trang trước đó nếu nhấn "Cancel"
@@ -69,7 +69,7 @@ public class AddComment extends HttpServlet {
             } else {
                 // Check if rating and comment are provided
                     if (rating == null || comment == null || rating.isEmpty() || comment.isEmpty()) {
-                        request.setAttribute("error", "Vui lòng nhập đủ thông tin và đánh giá sao trước khi gửi bình luận !!");
+                        request.setAttribute("error", "Please enter enough information and rate before posting a comment!!");
                         request.getRequestDispatcher("listallnews").forward(request, response);
                         return;
                     }
@@ -78,7 +78,7 @@ public class AddComment extends HttpServlet {
                 if (cmt != null && cmt.getStar() > 0) {
                     PrintWriter out = response.getWriter();
                     out.println("<script type=\"text/javascript\">");
-                    out.println("if(confirm('Bạn đã bình luận trước đó rồi, chỉ có thể sửa')) {");
+                    out.println("if(confirm('You have already commented before, you can only correct it')) {");
                     out.println("   history.back();");  // Quay lại trang trước đó nếu nhấn "OK"
                     out.println("}");
                     out.println("</script>");

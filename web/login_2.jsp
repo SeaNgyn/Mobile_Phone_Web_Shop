@@ -274,20 +274,15 @@
         <div class="container" id="container">
             <div class="form-container sign-up-container">
                 <form action="register" method="post">
-                    <h1>Tạo tài khoản</h1>
-                    <div class="social-container">
-                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <span>hoặc sử dụng để đăng ký</span>
-                    <input type="text" required name="username1" placeholder="Tài khoản để đăng nhập (*)" />
+                    <h1>Register</h1>
+                    <span>Or use to register</span>
+                    <input type="text" required name="username1" placeholder="Username (*)" />
                     <input type="email" name="email1" placeholder="Email" value=""/>
-                    <input type="phone" required name="phone" required placeholder="Phone" value=""/>
-                    <input type="password" required name="password1" placeholder="Mật khẩu để đăng nhập (*)" />
-                    <input type="password" required name="confirm-password1" placeholder="Nhập lại mật khẩu (*)" />
+                    <input type="phone" required name="phone" required placeholder="Phone (*)" value=""/>
+                    <input type="password" required name="password1" placeholder="Password (*)" />
+                    <input type="password" required name="confirm-password1" placeholder="Confirm password (*)" />
                     <input type="hidden" name="signUp" value="1"/>
-                    <button type="submit">Đăng ký</button>
+                    <button type="submit">Register</button>
                     <c:if test="${errorPass != null && signup == 1}">
                         <script style="color: red">
                             alert("${requestScope.errorPass}");
@@ -302,31 +297,31 @@
             </div>
             <div class="form-container sign-in-container">
                 <form action="login" method="post">
-                    <h1>Đăng nhập</h1>
+                    <h1>Login</h1>
                     <div class="social-container">
-                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                        
                         <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile
                            &redirect_uri=http://localhost:9999/WebApplication3/LoginGoogleHandler&response_type=code
                            &client_id=794097817165-ak2p0ik9hasiq6fdgeju3ahp519a79vk.apps.googleusercontent.com&approval_prompt=force" class="social"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                        
                     </div>
-                    <span>hoặc bằng tài khoản</span>
+                    <span>Or use account</span>
                     <input type="text" name="username" placeholder="Tài khoản" value="${cookie.cuser.value}" />
                     <input type="password" name="password" placeholder="Mật khẩu" value="${cookie.cpass.value}"/>
                     <a>     
-                        <label style="cursor: pointer" for="remember">Nhớ tài khoản</label>  
+                        <label style="cursor: pointer" for="remember">Remember</label>  
                         <input style="margin: 0px; cursor: pointer" type="checkbox" ${(cookie.crem.value != null?'checked':'')} class="remember-checkbox" name="rem" id="remember" value="ON">
                     </a>
-                    <a href="forgotPassword.jsp">Quên mật khẩu</a>
+                    <a href="forgotPassword.jsp">Forgot password</a>
                     <input type="hidden" name="signIn" value="1"/>
-                    <button type="submit">Đăng nhập</button>
+                    <button type="submit">Login</button>
 
                     <%-- Kiểm tra cooldown time và hiển thị thông báo --%>
                     <% Long cooldownEndTime = (Long) session.getAttribute("cooldownEndTime"); %>
                     <% long currentTime = System.currentTimeMillis(); %>
                     <% if (cooldownEndTime != null && cooldownEndTime.longValue() > currentTime) { %>
                     <div id="cooldown-message">
-                        Bạn phải chờ 10 giây để đăng nhập lại.
+                        You must wait 20 seconds to log in again.
                         <%-- Thêm đồng hồ đếm ngược --%>
                         <div id="countdown"></div>
                     </div>
@@ -342,7 +337,7 @@
                                 document.getElementById('cooldown-message').style.display = 'none';
                             } else {
                                 var seconds = Math.floor((remainingTime / 1000) % 60);
-                                countdownElement.innerHTML = 'Thời gian còn lại: ' + seconds + ' giây';
+                                countdownElement.innerHTML = 'Remaining time: ' + seconds + ' second';
                             }
                         }, 1000);
                     </script>
@@ -350,7 +345,7 @@
 
                     <c:if test="${username != null && signin == 1}">
                         <script style="color: red">
-                            alert("Tài khoản ${requestScope.username} của bạn không tồn tại hoặc đã hết phiên đăng nhập. Vui lòng đăng nhập lại.");
+                            alert("Your Account ${requestScope.username} was exist or out of expired. Please login again.");
                         </script>
                     </c:if>
                     <c:if test="${errorPass != null }">
@@ -365,13 +360,13 @@
                 <div class="overlay">
                     <div class="overlay-panel overlay-left">
                         <h1>Welcome Back!</h1>
-                        <p>Để duy trì kết nối với chúng tôi vui lòng đăng nhập bằng thông tin cá nhân của bạn</p>
-                        <button class="ghost" id="signIn">Đăng nhập</button>
+                        <p>To stay connected with us please log in with your personal information</p>
+                        <button class="ghost" id="signIn">Login</button>
                     </div>
                     <div class="overlay-panel overlay-right">
                         <h1>Hello, Friend!</h1>
-                        <p>Nhập thông tin cá nhân của bạn và bắt đầu hành trình với chúng tôi</p>
-                        <button class="ghost" id="signUp">Tạo tài khoản</button>
+                        <p>Enter your personal details and start your journey with us</p>
+                        <button class="ghost" id="signUp">Register</button>
                     </div>
                 </div>
             </div>

@@ -56,6 +56,106 @@ public class OrderDAO extends DBContext {
         return ls;
     }
 
+    public String getMonthDb() {
+        StringBuilder SMonth = new StringBuilder();
+        String sql = "SELECT DISTINCT MONTH(CreatedOn) FROM [dbo].[Order] ORDER BY MONTH(createdOn)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            boolean isFirst = true;
+            while (rs.next()) {
+                int monthNum = rs.getInt(1);
+                String monthName = getMonthName(monthNum);
+                if (!isFirst) {
+                    SMonth.append(",");
+                } else {
+                    isFirst = false;
+                }
+                SMonth.append("'" + monthName + "'");
+            }
+        } catch (Exception e) {
+        }
+        return SMonth.toString();
+    }
+
+    private String getMonthName(int monthNum) {
+        switch (monthNum) {
+            case 1:
+                return "January";
+            case 2:
+                return "February";
+            case 3:
+                return "March";
+            case 4:
+                return "April";
+            case 5:
+                return "May";
+            case 6:
+                return "June";
+            case 7:
+                return "July";
+            case 8:
+                return "August";
+            case 9:
+                return "September";
+            case 10:
+                return "October";
+            case 11:
+                return "November";
+            case 12:
+                return "December";
+            default:
+                return "Unknown";
+        }
+    }
+
+    public String getBrandName() {
+        StringBuilder SBrand = new StringBuilder();
+        String sql = "SELECT SUM(o.[ListPrice] * o.[Quantity]) as KetQua, c.CategoryId, c.CategoryName\n"
+                + "FROM\n"
+                + "[dbo].[OrderDetails] o\n"
+                + "JOIN Product p ON o.ProductId = p.ProductId\n"
+                + "JOIN Category c ON p.CategoryId = c.CategoryId\n"
+                + "GROUP BY\n"
+                + "c.CategoryId, c.CategoryName\n"
+                + "ORDER BY c.CategoryId;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            boolean isFirst = true;
+            while (rs.next()) {
+                int brandNum = rs.getInt(2);
+                String brandName = getBrandName(brandNum);
+                if (!isFirst) {
+                    SBrand.append(",");
+                } else {
+                    isFirst = false;
+                }
+                SBrand.append("'" + brandName + "'");
+            }
+        } catch (Exception e) {
+        }
+        return SBrand.toString();
+    }
+
+    private String getBrandName(int brandNam) {
+        switch (brandNam) {
+            case 1:
+                return "Iphone";
+            case 2:
+                return "Samsung";
+            case 3:
+                return "Oppo";
+            case 4:
+                return "Xiaomi";
+            case 5:
+                return "Realme";
+            default:
+                return "Unknown";
+        }
+    }
+
+    //CUONG
     public List<Integer> getPriceSalesMonth() {
         List<Integer> ls = new ArrayList<>();
         PreparedStatement stm = null;
@@ -323,7 +423,8 @@ public class OrderDAO extends DBContext {
 
     public static void main(String[] args) {
         OrderDAO dao = new OrderDAO();
-        dao.deleteOrderAndODetail(33);
+        dao.getMonthDb();
+        System.out.println(dao.getMonthDb());
 
     }
 

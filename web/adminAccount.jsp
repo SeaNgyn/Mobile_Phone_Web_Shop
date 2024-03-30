@@ -131,32 +131,11 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Users</h1>
-                            <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item"><a href="./admin_template/index.jsp">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Users</li>
-                            </ol>
-
-                            <!-- Thêm nút ?? thêm s?n ph?m m?i
-                            <div class="mb-4">
-                                <a href="add-products.jsp"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">AddAdmin</button></a>
-                            </div> -->
-
-                            <!-- Gi? ch? ?? thông báo ho?c c?nh báo -->
-                            <div id="productNotifications"></div>
-
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    DataTables is a third party plugin that is used to generate the demo table below. For more
-                                    information about DataTables, please visit the
-                                    <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                    .
-                                </div>
-                            </div>
+                            <h1 class="mt-4">Admins</h1>
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
-                                    DataTable Example
+                                    DataTable
                                 </div>
                                 <!-- Navbar Search-->
                                 <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="searchadminacc">
@@ -177,8 +156,8 @@
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
                                                 <th>User Name</th>
-                                                <th>Password</th>
-                                                <th>Role ID</th>
+<!--                                                <th>Password</th>-->
+                                                <th>Role</th>
                                                 <th>Email</th>
                                                 <th>Created By</th>
                                                 <th>Created On</th>
@@ -194,7 +173,7 @@
                                                     <td>${a.firstname}</td>
                                                     <td>${a.lastname}</td>
                                                     <td>${a.username}</td>
-                                                    <td>${a.password}</td>
+<!--                                                    <td>${a.password}</td>-->
                                                     <td>${a.roleName}</td>
                                                     <td>${a.email}</td>
                                                     <td>${a.createdName}</td>

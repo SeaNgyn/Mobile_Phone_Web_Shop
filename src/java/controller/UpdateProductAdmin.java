@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.CategoryDAO;
 import dal.ProductDAO;
 import model.Product;
 import java.io.IOException;
@@ -22,8 +23,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Category;
 
 /**
  *
@@ -47,8 +50,11 @@ public class UpdateProductAdmin extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             ProductDAO dao = new ProductDAO();
+            CategoryDAO dao1 = new CategoryDAO();
             int pid = Integer.parseInt(request.getParameter("id"));
             Product p = dao.getProdctById(pid);
+            List<Category> ca = dao1.getAllCategory();
+            request.setAttribute("ca", ca);
             request.setAttribute("data", p);
             request.getRequestDispatcher("update-products.jsp").forward(request, response);
 

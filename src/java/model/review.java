@@ -16,6 +16,24 @@ public class review {
     private String comment;
     private int star;
     private String time_rv;
+    private String nameProduct;
+    private String nameCustomer;
+
+    public String getNameProduct() {
+        return nameProduct;
+    }
+
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
+    }
+
+    public String getNameCustomer() {
+        return nameCustomer;
+    }
+
+    public void setNameCustomer(String nameCustomer) {
+        this.nameCustomer = nameCustomer;
+    }
 
     public review() {
     }

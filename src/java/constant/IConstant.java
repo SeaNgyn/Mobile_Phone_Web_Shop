@@ -16,11 +16,11 @@ public class IConstant {
         "Most sale",};
 
     public static final String[] FILTER_PRICE = new String[]{
-        "< 5 triệu",
-        "5 - 10 triệu",
-        "10 - 15 triệu",
-        "15 - 30 triệu",
-        "> 30 triệu"
+        "< 5 million",
+        "5 - 10 million",
+        "10 - 15 million",
+        "15 - 30 million",
+        "> 30 million"
     };
         public static final int NUMBER_PER_PAGE= 9;
 }
