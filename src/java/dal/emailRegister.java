@@ -23,8 +23,8 @@ import javax.mail.internet.MimeMessage;
  */
 public class emailRegister {
 
-    final static String from = "nguyentheanh2k3@gmail.com";
-    final static String password = "fatc pwyz lann kxpk";
+    final static String from = "";
+    final static String password = "";
 
     public void sendMailRegister(String to, String user, String pass) {
         // Properties: khai bao cac thuoc tinh
@@ -46,7 +46,7 @@ public class emailRegister {
         Session session = Session.getInstance(props, auth);
 
         // gui email
-        //to = "nguyentheanhvnhn2k3@gmail.com";
+        //to = "";
         // tao mot tin nhan
         MimeMessage msg = new MimeMessage(session);
 
